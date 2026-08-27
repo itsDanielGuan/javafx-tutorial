@@ -39,13 +39,15 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box so that the image is on the left and the text is on the right.
+     * Flips the dialog box so that the image is on the left and the text is on the right,
+     * and restyles the speech bubble to point the other way.
      */
     private void flip() {
         ObservableList<Node> children = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(children);
         this.getChildren().setAll(children);
         this.setAlignment(Pos.TOP_LEFT);
+        dialog.getStyleClass().add("reply-label");
     }
 
     public static DialogBox getUserDialog(String text, Image image) {
