@@ -54,9 +54,28 @@ public class DialogBox extends HBox {
         return new DialogBox(text, image);
     }
 
-    public static DialogBox getDukeDialog(String text, Image image) {
+    /**
+     * Tints the speech bubble according to the kind of command Duke just handled.
+     */
+    private void changeDialogStyle(String commandType) {
+        if (commandType == null) {
+            return;
+        }
+
+        switch (commandType) {
+        case "AddCommand" -> dialog.getStyleClass().add("add-label");
+        case "ChangeMarkCommand" -> dialog.getStyleClass().add("marked-label");
+        case "DeleteCommand" -> dialog.getStyleClass().add("delete-label");
+        default -> {
+            // Unknown command types keep the default bubble styling.
+        }
+        }
+    }
+
+    public static DialogBox getDukeDialog(String text, Image image, String commandType) {
         DialogBox dialogBox = new DialogBox(text, image);
         dialogBox.flip();
+        dialogBox.changeDialogStyle(commandType);
         return dialogBox;
     }
 }
